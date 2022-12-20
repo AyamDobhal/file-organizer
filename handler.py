@@ -8,11 +8,13 @@ class Handler(FileSystemEventHandler):
         self.organizer = organizer
 
     def on_moved(self, event: Union[DirMovedEvent, FileMovedEvent]):
-        self.organizer.move(event.src_path)
+        if isinstance(event, FileMovedEvent):
+            self.organizer.move(event.dest_path)
 
     def on_created(self, event: Union[DirCreatedEvent, FileCreatedEvent]):
-        self.organizer.move(event.src_path)
+        if isinstance(event, FileCreatedEvent):
+            self.organizer.move(event.src_path)
 
     def on_modified(self, event: Union[DirModifiedEvent, FileModifiedEvent]):
-        self.organizer.move(event.src_path)
-
+        if isinstance(event, FileModifiedEvent):
+            self.organizer.move(event.src_path)

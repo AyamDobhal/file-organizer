@@ -17,6 +17,9 @@ def main():
     handler = Handler(organizer)
     observer = Observer()
 
+    # call organizer.organize() to organize the files in the directory that havent been moved yet
+    organizer.organize()
+
     observer.schedule(handler, path=dir_path, recursive=True)
 
     observer.start()
