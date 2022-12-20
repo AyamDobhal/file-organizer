@@ -7,18 +7,17 @@ from watchdog.observers import Observer
 
 def main():
     if sys.argv[1:]:
-        downloads_path = sys.argv[1]
+        dir_path = sys.argv[1]
     else:
-        print("Please provide a path to the downloads folder")
+        print("Please provide a value for path")
         print("Usage: python main.py <path>")
         exit(1)
 
-    downloads_path = sys
-    organizer = Organizer(downloads_path)
+    organizer = Organizer(dir_path)
     handler = Handler(organizer)
     observer = Observer()
 
-    observer.schedule(handler, path=downloads_path, recursive=True)
+    observer.schedule(handler, path=dir_path, recursive=True)
 
     observer.start()
     try:
